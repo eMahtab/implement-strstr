@@ -86,6 +86,51 @@ class Solution {
          
 ```
 
+# Implementation 2 : Rabin Karp Algorithm
+```java
+
+class Solution {
+    public int strStr(String t, String p) {
+        int n = t.length();
+        int m = p.length();
+        if (m == 0) return 0;
+        
+        int pCode = hashCode(p);
+        
+        for(int i = 0; i < n-m+1; i++) {
+            String substr = t.substring(i,(i+m));
+            int textCode = hashCode(substr);
+            if(pCode == textCode) {
+                if(isMatch(substr,p))
+                    return i;
+            }
+        }
+        
+        return -1;
+    }
+
+    private int hashCode(String s) {
+        if(s.length() == 0)
+            return 0;
+        int hashCode = 0;
+        for(char ch : s.toCharArray()) {
+            hashCode += (ch - 'a') + 1;
+        }
+        return hashCode;
+    }
+    
+    private boolean isMatch(String s , String pattern) {
+        int m = pattern.length();
+        for(int i = 0; i < m; i++) {
+            if(s.charAt(i) != pattern.charAt(i))
+                return false;
+        }
+        return true;
+    }
+}
+         
+```
+
 # References :
 1. https://www.youtube.com/watch?v=V5-7GzOfADQ (Abdul Bari)
 2. https://www.youtube.com/watch?v=PcYtBG29Dz4 (Happygirlzt, Java Implementation)
