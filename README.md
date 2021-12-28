@@ -130,7 +130,42 @@ class Solution {
 }
          
 ```
-# Implementation 3 : Rabin Karp (Rolling Hash, Overflow issue)
+# Implementation 3 : Rabin Karp (Rolling Hash)
+```java
+class Solution {
+    public int strStr(String haystack, String needle) {
+        int n = haystack.length();
+        int m = needle.length();
+        
+         if(m > n)
+            return -1;
+        
+        int needleHash = 0;
+        int haystackHash = 0;
+        
+        // lets calculate the starting hash
+        for(int i = 0; i < m; i++) {
+            needleHash += ((needle.charAt(i) - 'a' + 1));
+            haystackHash += ((haystack.charAt(i) - 'a' + 1));
+        }
+        
+        for(int i=0; i < n - m +1; i++) {
+            String substr = haystack.substring(i,(i+m));
+            if(needleHash == haystackHash && substr.equals(needle)) {
+                    return i;
+            }
+            // rolling hash
+            if(i != n -m) {
+                haystackHash = haystackHash - (haystack.charAt(i) - 'a' + 1);
+                haystackHash += haystack.charAt(i+m) - 'a' + 1;
+            }
+        }
+        
+        return -1;
+    }
+}
+```
+# Implementation 4 : Rabin Karp (Rolling Hash, Overflow issue)
 ```java
 class Solution {
     public int strStr(String haystack, String needle) {
