@@ -33,8 +33,27 @@ Output: 0
 1. 0 <= haystack.length, needle.length <= 5 * 104
 2. haystack and needle consist of only lower-case English characters.
 ```
+# Implementation 1 : Naive
+```java
+class Solution {
+    public int strStr(String haystack, String needle) {
+        int n = haystack.length();
+        int m = needle.length();
+        
+         if(m > n)
+            return -1;
+        
+        for(int i = 0; i < n -m +1; i++) {
+            if(haystack.substring(i,(i+m)).equals(needle))
+                return i;
+        }
+        
+        return -1;
+    }
+}
+```
 
-# Implementation 1 : KMP Algorithm
+# Implementation 2 : KMP Algorithm
 ```java
 
 class Solution {
@@ -86,7 +105,7 @@ class Solution {
          
 ```
 
-# Implementation 2 : Rabin Karp Algorithm
+# Implementation 3 : Rabin Karp Algorithm
 ```java
 
 class Solution {
@@ -130,7 +149,7 @@ class Solution {
 }
          
 ```
-# Implementation 3 : Rabin Karp (Rolling Hash)
+# Implementation 4 : Rabin Karp (Rolling Hash)
 ```java
 class Solution {
     public int strStr(String haystack, String needle) {
@@ -165,7 +184,7 @@ class Solution {
     }
 }
 ```
-# Implementation 4 : Rabin Karp (Rolling Hash, Overflow issue)
+# Implementation 5 : Rabin Karp (Rolling Hash, Overflow issue)
 ```java
 class Solution {
     public int strStr(String haystack, String needle) {
